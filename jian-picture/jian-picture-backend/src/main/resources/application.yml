@@ -1,0 +1,94 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+    #cookie 30 天后过期
+    session:
+      cookie:
+        max-age: 2592000
+spring:
+  application:
+    name: jian-picture-backend
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  #数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jian_picture?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  #Redis配置
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+  #Session 配置
+  session:
+    store-type: redis
+    #session 30 天后过期
+    timeout: 2592000
+  # 空间图片分表
+  shardingsphere:
+    datasource:
+      names: jian_picture
+      jian_picture:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/jian_picture?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: 1234
+    rules:
+      sharding:
+        tables:
+          picture:
+            actual-data-nodes: jian_picture.picture # 动态分表
+            table-strategy:
+              standard:
+                sharding-column: spaceId
+                sharding-algorithm-name: picture_sharding_algorithm  # 使用自定义分片算法
+        sharding-algorithms:
+          picture_sharding_algorithm:
+            type: CLASS_BASED
+            props:
+              strategy: standard
+              algorithmClassName: com.jian.jianpicturebackend.manager.sharding.PictureShardingAlgorithm
+    props:
+      sql-show: true
+mybatis-plus:
+  configuration:
+    # MyBatis 配置
+    map-underscore-to-camel-case: false
+    # 仅在开发环境打印日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    enable-sql-runner: true # 开启 MyBatis Plus 的 SQL 运行器
+    db-config:
+      logic-delete-field: isDelete # 逻辑删除字段名
+      logic-delete-value: 1 # 逻辑删除值
+      logic-not-delete-value: 0 # 逻辑未删除值
+#接口文档配置
+knife4j:
+  enable: true
+  openapi:
+    title: 接口文档
+    version: 1.0
+    group:
+      default:
+        api-rule: package
+        api-rule-resources:
+          - com.jian.jianpicturebackend.controller
+## 对象存储配置-腾讯云cos,已经放在本地application-local.yml中
+#cos:
+#  client:
+#    host: xx
+#    secretId: xx
+#    secretKey: xx
+#    region: xx
+#    bucket: xx
+
+## 阿里云 AI 配置
+#aliYunAi:
+#  apiKey: xxx
