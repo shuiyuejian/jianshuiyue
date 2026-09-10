@@ -20,7 +20,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 **AI 扩图**（阿里云百炼）、 按主色调搜图**、**空间多维分析**（ECharts 可视化）以及完整的**管理后台**，
 后端基于 Spring Boot + Sa-Token + Redis，前端基于 Vue 3 + Vite + Ant Design Vue。
 
-![1](C:\Users\test\Desktop\R\1.png)
+![1](docs/images/1.png)
 
 
 ## 功能特性
@@ -32,7 +32,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 
 - 管理员对用户的增删改查与分页管理
 
-  ![image-20260910214645561](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214645561.png)
+  ![image-20260910214645561](docs/images/image-20260910214645561.png)
 
 ### 公共图库
 - 三种上传方式：本地文件上传、URL 转存、批量抓取（关键词 + 数量，一键入库）
@@ -45,7 +45,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 
 - 高性能分页列表：Caffeine 本地缓存（5 分钟）+ Redis 分布式缓存多级加速
 
-  ![image-20260910214823808](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214823808.png)
+  ![image-20260910214823808](docs/images/image-20260910214823808.png)
 
 ### 智能搜索
 - 关键词 / 标签 / 分类组合搜索
@@ -54,7 +54,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 
 - 公共图库与空间内搜索隔离，互不干扰
 
-  ![image-20260910214904686](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214904686.png)
+  ![image-20260910214904686](docs/images/image-20260910214904686.png)
 
 ### 空间（私有 / 团队）
 - 三档配额：普通版（100 张 / 100MB）、专业版（1000 张 / 1000MB）、旗舰版（10000 张 / 10000MB）
@@ -63,7 +63,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 
 - 我的空间、空间详情、空间容量用量实时统计与校验（上传 / 删除自动维护 `totalSize` / `totalCount`）
 
-  ![image-20260910215033540](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215033540.png)
+  ![image-20260910215033540](docs/images/image-20260910215033540.png)
 
 ### 团队协作与权限
 - 空间成员邀请 / 移除 / 角色编辑，我加入的团队空间列表
@@ -74,23 +74,23 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 
 - 图片协同编辑：WebSocket 实时通道 + Disruptor 高性能无锁队列， 多人同时编辑同一图片可实时同步
 
-  ![image-20260910215228990](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215228990.png)
+  ![image-20260910215228990](docs/images/image-20260910215228990.png)
 
-  ![image-20260910215315910](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215315910.png)
+  ![image-20260910215315910](docs/images/image-20260910215315910.png)
 
 ### AI 扩图
 - 接入阿里云 AI（百炼图像扩展）：创建扩图任务 → 轮询任务状态 → 回填结果图
 
 - 接口：`POST /picture/out_painting/create_task`、`GET /picture/out_painting/get_task`
 
-  ![image-20260910215438357](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215438357.png)
+  ![image-20260910215438357](docs/images/image-20260910215438357.png)
 
 ### 空间分析（ECharts 可视化）
 - 用量分析、分类占比、标签统计（含词云）、空间大小趋势、用户贡献排行等多维度图表
 
 - 接口前缀：`/space/analyze`（`usage` / `category` / `tag` / `size` / `user` / `rank`）
 
-  ![image-20260910215544673](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215544673.png)
+  ![image-20260910215544673](docs/images/image-20260910215544673.png)
 
 ### 管理后台
 - 用户管理、图片管理、空间管理、空间成员管理四个 Admin 页面
@@ -166,7 +166,7 @@ jian-picture/                        # Git 仓库根目录
 
 ## 架构设计
 
-![image-20260910220310315](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910220310315.png)
+![image-20260910220310315](docs/images/image-20260910220310315.png)
 
 ## 快速开始
 
