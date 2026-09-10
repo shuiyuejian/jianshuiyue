@@ -19,6 +19,8 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 为此，JianPicture 提供了**公共图库**（全站共享、审核后可见）、**个人 / 团队空间**（配额隔离、成员权限管控）、
 **AI 扩图**（阿里云百炼）、**以图搜图 / 按主色调搜图**、**空间多维分析**（ECharts 可视化）以及完整的**管理后台**，
 后端基于 Spring Boot + Sa-Token + Redis + ShardingSphere，前端基于 Vue 3 + Vite + Ant Design Vue。
+![Uploading 1.png…]()
+
 
 ## 功能特性
 
