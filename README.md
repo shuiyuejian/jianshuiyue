@@ -1,6 +1,6 @@
 # JianPicture · 智能云图片库
 
-> 一站式智能图片管理与协作平台：公共图库 + 私有 / 团队空间 + AI 扩图  + 空间数据分析，开箱即用。
+> 一站式智能图片管理与协作平台：公共图库 + 私有 / 团队空间 + AI 扩图 + 空间数据分析，开箱即用。
 
 ![Java](https://img.shields.io/badge/Java-8-orange) ![SpringBoot](https://img.shields.io/badge/Spring_Boot-2.7.6-brightgreen) ![Vue](https://img.shields.io/badge/Vue-3.5-blue) ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue) ![Redis](https://img.shields.io/badge/Redis-6+-red) ![SaToken](https://img.shields.io/badge/Sa--Token-1.39.0-purple)
 
@@ -17,49 +17,80 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 - 想要 AI 能力（智能扩图、以图搜图、颜色搜图）但不想重复造轮子
 
 为此，JianPicture 提供了**公共图库**（全站共享、审核后可见）、**个人 / 团队空间**（配额隔离、成员权限管控）、
-**AI 扩图**（阿里云百炼）、**以图搜图 / 按主色调搜图**、**空间多维分析**（ECharts 可视化）以及完整的**管理后台**，
-后端基于 Spring Boot + Sa-Token + Redis + ShardingSphere，前端基于 Vue 3 + Vite + Ant Design Vue。
+**AI 扩图**（阿里云百炼）、 按主色调搜图**、**空间多维分析**（ECharts 可视化）以及完整的**管理后台**，
+后端基于 Spring Boot + Sa-Token + Redis，前端基于 Vue 3 + Vite + Ant Design Vue。
+
+![1](C:\Users\test\Desktop\R\1.png)
 
 
 ## 功能特性
 
 ### 用户模块
 - 注册 / 登录 / 登出（Redis 集中式 Session，30 天有效期）
+
 - 个人资料维护、头像上传、密码修改
-- VIP 兑换码兑换（`UserExchangeVipPage`），兑换后提升空间配额
+
 - 管理员对用户的增删改查与分页管理
+
+  ![image-20260910214645561](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214645561.png)
 
 ### 公共图库
 - 三种上传方式：本地文件上传、URL 转存、批量抓取（关键词 + 数量，一键入库）
+
 - 图片编辑：改名、简介、分类、标签；批量改名 / 打标签 / 改分类
+
 - 图片审核：管理员审核（通过 / 拒绝），保障公共图库内容质量
+
 - 标签 / 分类预设字典，前端下拉快速选择
+
 - 高性能分页列表：Caffeine 本地缓存（5 分钟）+ Redis 分布式缓存多级加速
+
+  ![image-20260910214823808](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214823808.png)
 
 ### 智能搜索
 - 关键词 / 标签 / 分类组合搜索
-- **以图搜图**：上传图片，基于 Bing 图片搜索能力返回相似图片（`ImageSearchApiFacade` + Jsoup）
+
 - **按颜色搜图**：上传时自动提取图片主色调（`picColor`），按颜色相似度检索
+
 - 公共图库与空间内搜索隔离，互不干扰
+
+  ![image-20260910214904686](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910214904686.png)
 
 ### 空间（私有 / 团队）
 - 三档配额：普通版（100 张 / 100MB）、专业版（1000 张 / 1000MB）、旗舰版（10000 张 / 10000MB）
+
 - 两种类型：私有空间（仅自己可见）、团队空间（多成员协作）
+
 - 我的空间、空间详情、空间容量用量实时统计与校验（上传 / 删除自动维护 `totalSize` / `totalCount`）
+
+  ![image-20260910215033540](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215033540.png)
 
 ### 团队协作与权限
 - 空间成员邀请 / 移除 / 角色编辑，我加入的团队空间列表
+
 - Sa-Token 权限模型：`picture:view` / `picture:upload` / `picture:edit` / `picture:delete` / `spaceUser:manage`
+
 - 注解式鉴权：`@SaSpaceCheckPermission` + `@AuthCheck`（管理员），AOP 统一拦截
+
 - 图片协同编辑：WebSocket 实时通道 + Disruptor 高性能无锁队列， 多人同时编辑同一图片可实时同步
+
+  ![image-20260910215228990](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215228990.png)
+
+  ![image-20260910215315910](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215315910.png)
 
 ### AI 扩图
 - 接入阿里云 AI（百炼图像扩展）：创建扩图任务 → 轮询任务状态 → 回填结果图
+
 - 接口：`POST /picture/out_painting/create_task`、`GET /picture/out_painting/get_task`
+
+  ![image-20260910215438357](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215438357.png)
 
 ### 空间分析（ECharts 可视化）
 - 用量分析、分类占比、标签统计（含词云）、空间大小趋势、用户贡献排行等多维度图表
+
 - 接口前缀：`/space/analyze`（`usage` / `category` / `tag` / `size` / `user` / `rank`）
+
+  ![image-20260910215544673](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910215544673.png)
 
 ### 管理后台
 - 用户管理、图片管理、空间管理、空间成员管理四个 Admin 页面
@@ -76,8 +107,7 @@ JianPicture 是一个前后端分离的企业级图片管理平台，解决个�
 | MySQL | 8.0 | 主业务库 `jian_picture` |
 | Redis + Spring Session | 6+ | Session 集中存储、图片列表缓存 |
 | Caffeine | 3.1.8 | 本地多级缓存 |
-| Sa-Token | 1.39.0 | 登录鉴权 + 空间权限（Redis-Jackson 持久化） |
-| ShardingSphere-JDBC | 5.2.0 | `picture` 表按 `spaceId` 动态分表 |
+| Sa-Token | 1.39.0 | 登录鉴权 + 空间权限（Redis-Jackson 持久化 |
 | 腾讯云 COS | 5.6.227 | 对象存储（`CosManager` / `FileManager`） |
 | Knife4j | 4.4.0 | 接口文档（基于 OpenAPI2） |
 | Disruptor | 3.4.2 | 协同编辑消息无锁队列 |
@@ -133,6 +163,10 @@ jian-picture/                        # Git 仓库根目录
 │           └── utils/pictureEditWebSocket.ts# 协同编辑 WebSocket 客户端
 └── *.png                            # 需求 / 面试相关的参考图片（非项目代码）
 ```
+
+## 架构设计
+
+![image-20260910220310315](C:\Users\test\AppData\Roaming\Typora\typora-user-images\image-20260910220310315.png)
 
 ## 快速开始
 
