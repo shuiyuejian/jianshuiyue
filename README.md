@@ -1,6 +1,6 @@
 # JianPicture · 智能云图片库
 
-> 一站式智能图片管理与协作平台：公共图库 + 私有 / 团队空间 + AI 扩图 + 以图搜图 + 空间数据分析，开箱即用。
+> 一站式智能图片管理与协作平台：公共图库 + 私有 / 团队空间 + AI 扩图  + 空间数据分析，开箱即用。
 
 ![Java](https://img.shields.io/badge/Java-8-orange) ![SpringBoot](https://img.shields.io/badge/Spring_Boot-2.7.6-brightgreen) ![Vue](https://img.shields.io/badge/Vue-3.5-blue) ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue) ![Redis](https://img.shields.io/badge/Redis-6+-red) ![SaToken](https://img.shields.io/badge/Sa--Token-1.39.0-purple)
 
